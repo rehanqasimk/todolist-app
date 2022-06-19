@@ -54,10 +54,9 @@ function App() {
     resetSate();
   };
 
-  const editItem = ({ index, editStyle }) => {
+  const editItem = (index) => {
     setEditMode(true);
     setInputValue(todolist[index]);
-    console.log(todolist, index);
     setEditIndex(index);
   };
 
@@ -79,6 +78,7 @@ function App() {
           <Card.Text>Add , Edit or delete Items in the list</Card.Text>
           <InputGroup className="mb-3">
             <Form.Control
+              autoFocus
               placeholder="Recipient's username"
               as="input"
               onChange={onInputChange}
