@@ -12,3 +12,11 @@
   font-size: 15px;
   font-weight: 600;
 }
+
+.edit-background {
+  background-color: yellow;
+}
+
+.ln-th-text {
+  text-decoration: line-through;
+}
