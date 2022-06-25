@@ -14,5 +14,9 @@
 }
 
 .edit-background {
-  background-color: "yellow";
+  background-color: yellow;
+}
+
+.ln-th-text {
+  text-decoration: line-through;
 }

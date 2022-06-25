@@ -21,8 +21,15 @@ const Delete = ({ onClick }) => {
   );
 };
 
-const CheckBox = ({ className }) => {
-  return <input className={className} type="checkbox" />;
+const CheckBox = ({ className, onClick, checked }) => {
+  return (
+    <input
+      onClick={onClick}
+      // checked={checked}
+      className={className}
+      type="checkbox"
+    />
+  );
 };
 
 function App() {
@@ -32,6 +39,8 @@ function App() {
   const [inputValue, setInputValue] = useState("");
   const [editMode, setEditMode] = useState(false);
   const [editIndex, setEditIndex] = useState();
+  const [checkdMode, setcheckdMode] = useState(false);
+  const [checkIndex, setCheckIndex] = useState();
 
   // states end
   const AddItem = (e) => {
@@ -69,6 +78,12 @@ function App() {
     setInputValue(e.target.value);
   };
 
+  const checkfnc = (index) => {
+    setCheckIndex(index);
+    setcheckdMode(!checkdMode);
+    AddList(todolist);
+  };
+
   return (
     <div className="container d-flex justify-content-center cont-1">
       <Card>
@@ -93,17 +108,33 @@ function App() {
 
           <div className="w-100">
             {todolist.map((item, index) => {
+              console.log("AFTER RETURN", checkdMode);
               return (
                 <div
-                  className={`d-flex align-items-baseline w-100 mb-1 listitemcontainer ${
-                    editMode ? "edit-background" : false
-                  }`}
+                  className="d-flex align-items-baseline w-100 mb-1 listitemcontainer"
                   key={index}
                 >
                   <div>
-                    <CheckBox className=" ms-2 me-5" />
+                    <CheckBox
+                      checked={false}
+                      className="ms-2 me-5"
+                      onClick={() => {
+                        checkfnc(index);
+                      }}
+                    />
                   </div>
-                  <div className="flex-grow-1 item-text">{item}</div>
+                  <div
+                    id={`${index}`}
+                    className={`flex-grow-1 item-text ${
+                      editMode && editIndex === index
+                        ? "edit-background"
+                        : false
+                    }   ${
+                      checkdMode && checkIndex === index ? "ln-th-text" : false
+                    }`}
+                  >
+                    {item}
+                  </div>
                   <div className="justify-self-end">
                     <Edit onClick={() => editItem(index)} />
                     &nbsp;
